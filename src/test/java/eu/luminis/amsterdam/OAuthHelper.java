@@ -14,8 +14,12 @@ import org.springframework.test.web.servlet.request.RequestPostProcessor;
 @Component
 public class OAuthHelper {
 
+    private final AuthorizationServerTokenServices tokenservice;
+
     @Autowired
-    AuthorizationServerTokenServices tokenservice;
+    public OAuthHelper(AuthorizationServerTokenServices tokenservice) {
+        this.tokenservice = tokenservice;
+    }
 
     public RequestPostProcessor addBearerToken(final String username, String... authorities) {
         return mockRequest -> {
